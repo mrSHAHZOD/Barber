@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BranchController;
+use App\Http\Controllers\Api\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BusinessController;
 use App\Http\Controllers\Api\AuthController;
@@ -27,4 +28,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('branches', BranchController::class);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::apiResource('employees', EmployeeController::class);
+
 });

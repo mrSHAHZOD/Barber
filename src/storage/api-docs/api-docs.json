@@ -395,6 +395,243 @@
                     }
                 ]
             }
+        },
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Employee list",
+                "operationId": "employeeIndex",
+                "responses": {
+                    "200": {
+                        "description": "Employee list"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Create employee",
+                "operationId": "employeeStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "business_id",
+                                    "branch_id",
+                                    "employee_position_id",
+                                    "first_name",
+                                    "last_name",
+                                    "phone",
+                                    "gender"
+                                ],
+                                "properties": {
+                                    "business_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "branch_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "employee_position_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Ali"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Valiyev"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "ali@test.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+998901112233"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1998-01-01"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "experience_years": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "about": {
+                                        "type": "string",
+                                        "example": "Senior Barber"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "photo.jpg"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Employee created"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/employees/{employee}": {
+            "put": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Update employee",
+                "operationId": "employeeUpdate",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Ali"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Valiyev"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+998901112233"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "ali@test.com"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "experience_years": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "about": {
+                                        "type": "string",
+                                        "example": "Updated info"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "photo.jpg"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employee updated"
+                    },
+                    "404": {
+                        "description": "Employee not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Delete employee",
+                "operationId": "employeeDelete",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee deleted"
+                    },
+                    "404": {
+                        "description": "Employee not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -473,6 +710,10 @@
         {
             "name": "Branches",
             "description": "Branches"
+        },
+        {
+            "name": "Employees",
+            "description": "Employees"
         }
     ]
 }
