@@ -14,12 +14,20 @@ class Employee extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'business_id',
         'branch_id',
         'employee_position_id',
+        'user_id',
         'first_name',
         'last_name',
         'email',
-        'phone_number',
+        'phone',
+        'birth_date',
+        'gender',
+        'experience_years',
+        'about',
+        'photo',
+        'rating',
         'is_active',
     ];
 
