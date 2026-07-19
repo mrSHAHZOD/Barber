@@ -238,54 +238,16 @@
                 ]
             }
         },
-        "/api/{resource}": {
+        "/api/branches": {
             "get": {
                 "tags": [
-                    "Barbershop resources"
+                    "Branches"
                 ],
-                "summary": "List a resource",
-                "operationId": "72b74bf39be4a1cf3cc4f41d8d2a79f6",
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "business-types",
-                                "branches",
-                                "branch-working-hours",
-                                "branch-special-days",
-                                "employee-positions",
-                                "employees",
-                                "employee-working-hours",
-                                "employee-breaks",
-                                "categories",
-                                "services",
-                                "bookings",
-                                "booking-services",
-                                "payments",
-                                "reviews",
-                                "favorites",
-                                "employee-portfolios",
-                                "employee-certificates",
-                                "employee-social-links"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "per_page",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer",
-                            "default": 15
-                        }
-                    }
-                ],
+                "summary": "Get all branches",
+                "operationId": "76938a0089ac92cfb2e0fb40af32c73b",
                 "responses": {
                     "200": {
-                        "description": "Paginated records"
+                        "description": "Branches retrieved successfully"
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -299,25 +261,56 @@
             },
             "post": {
                 "tags": [
-                    "Barbershop resources"
+                    "Branches"
                 ],
-                "summary": "Create a resource",
-                "operationId": "1826f0fc05bf463a60266ab37cd484cf",
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "summary": "Create Branch",
+                "operationId": "582a679c4adf05c5fdb745be9100e5d6",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "business_id",
+                                    "name",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "business_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Yunusobod Branch"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+998901112233"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "branch@test.com"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Tashkent"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 41.311
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 69.279
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -325,10 +318,10 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Created"
+                        "description": "Branch created successfully"
                     },
-                    "403": {
-                        "description": "Forbidden"
+                    "401": {
+                        "description": "Unauthenticated"
                     },
                     "422": {
                         "description": "Validation error"
@@ -341,34 +334,39 @@
                 ]
             }
         },
-        "/api/{resource}/{id}": {
+        "/api/branches/{branch}": {
             "get": {
                 "tags": [
-                    "Barbershop resources"
+                    "Branches"
                 ],
-                "summary": "Show a resource",
-                "operationId": "30c89efb1d1f6046fb41e4909a8fd64f",
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "summary": "Show branch",
+                "operationId": "5ce397d53def55d3db5ea6c4d928f87d",
                 "responses": {
                     "200": {
-                        "description": "Record"
+                        "description": "Branch retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Branch not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "Update branch",
+                "operationId": "111cd4c99318763a36068408c93ad026",
+                "responses": {
+                    "200": {
+                        "description": "Branch updated successfully"
+                    },
+                    "404": {
+                        "description": "Branch not found"
                     }
                 },
                 "security": [
@@ -379,82 +377,16 @@
             },
             "delete": {
                 "tags": [
-                    "Barbershop resources"
+                    "Branches"
                 ],
-                "summary": "Delete a resource",
-                "operationId": "f0180d4d21b1b3b155476df5bb41e2ee",
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "summary": "Delete branch",
+                "operationId": "bb8d9aa1a9983fb94d8d1868d0da6ae4",
                 "responses": {
                     "200": {
-                        "description": "Deleted"
+                        "description": "Branch deleted successfully"
                     },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "patch": {
-                "tags": [
-                    "Barbershop resources"
-                ],
-                "summary": "Update a resource",
-                "operationId": "d46046d079d8a58f5567f95b3f302020",
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                    "404": {
+                        "description": "Branch not found"
                     }
                 },
                 "security": [
@@ -539,8 +471,8 @@
             "description": "Sanctum token authentication endpoints"
         },
         {
-            "name": "Barbershop resources",
-            "description": "Protected CRUD API for branches, employees, services, bookings and related records."
+            "name": "Branches",
+            "description": "Branches"
         }
     ]
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BranchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BusinessController;
 use App\Http\Controllers\Api\AuthController;
@@ -21,4 +22,9 @@ Route::prefix('auth')->group(function (): void {
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('businesses', BusinessController::class);
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('branches', BranchController::class);
 });
